@@ -1,32 +1,57 @@
-if [ ! -f ~/.config/bash_scripts/git_multi_user.json ]; then
+function _get-git-user-file() {
+	echo "${HOME}/.config/bash_scripts/git_multi_user.json"
+}
+
+if [ ! -f $(_get-git-user-file) ]; then
 	mkdir -p ~/.config/bash_scripts/
-	cat <<- EOF > ~/.config/bash_scripts/git_multi_user.json
-	{
-	    "user_name": {
+	cat <<- EOF > $(_get-git-user-file)
+	[
+	    {
+	        "username": "user_name",
 	        "email": "sample@example.com"
 	    },
-		"user_name2": {
-	        "email": "sample@example.com"
+	    {
+		    "username": "user_name2",
+			"alias": "user2",
+	        "email": "sample2@example.com"
 	    }
-	}
+	]
 	EOF
 fi
 
-function git-user-set(){
-	SETTING_FILE="${HOME}/.config/bash_scripts/git_multi_user.json"
-	function config-set() { # username email
+function git-user-set(){ # (alias or username)
+	SETTING_FILE=$(_get-git-user-file)
+	function config-set() { # (username, email)
 		# Setting up user and mail
 		git config --local user.name $1 && \
 		git config --local user.email $2 && \
 		return 0
 	}
-	email=$(cat ${SETTING_FILE}| jq -r --exit-status .$1.email)
+
+	function get-user(){ # (username or alias)
+		user=$(cat ${SETTING_FILE}| jq -r --exit-status ".[] | select(.username == \"$1\" or .alias == \"$1\")")
+		if [ 0 -eq $? ]; then
+			echo $user
+			return 0
+		else
+			return 1
+		fi
+	}
+
+	user=$(get-user $1) || return 1
 	if [ 0 -eq $? ]; then
-		config-set $1 ${email}
+		username=$(echo $user| jq -r --exit-status ".username")
+		email=$(echo $user| jq -r --exit-status ".email")
+		config-set ${username} ${email}
+		return 0
 	else
 		echo "Users that do not exist."
 		return 1
 	fi
+}
+
+function git-user-list() {
+	cat $(_get-git-user-file)| jq -r ".[].username"
 }
 
 function git-user-get() {
