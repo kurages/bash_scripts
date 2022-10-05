@@ -17,4 +17,4 @@ done < <(find "$install_dir/" -name "*.bashrc"| sort -r)
 
 EOF
 
-
+cd -
