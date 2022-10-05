@@ -13,7 +13,7 @@ cat <<EOF >> ~/.bashrc
 
 while read -r f; do
 	source \$f
-done < <(find "$install_dir/" -name "*.bashrc"| sort -r)
+done < <(find "$install_dir/" -name "*.bashrc" -type f -regex ".+/[^_][^/]*"| sort -r)
 
 EOF
 
