@@ -1,14 +1,17 @@
+if [ ! -d ~/.venv/ ]; then
+	mkdir ~/.venv
+fi
 
 venv-gen() {
-        python3 -m venv ~/.venv/$1
+	python3 -m venv ~/.venv/$1
 }
 
 venv-list() {
-        ls -1 ~/.venv/
+	ls -1 ~/.venv/
 }
 
 venv() {
-        source ~/.venv/$1/bin/activate
+	source ~/.venv/$1/bin/activate
 }
 
 alias end="deactivate"

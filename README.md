@@ -1,5 +1,7 @@
 # bash_scripts
-bashの起動スクリプト  
+拡張機能的な使い方ができるやつ  
+
+デフォルトで入ってるやつはそのうちまとめます  
 
 ## how to use
 `bash install.sh`
