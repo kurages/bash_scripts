@@ -5,6 +5,10 @@
 `_`から始まるファイルは無視されます。  
 
 ## how to use
+### Dissolution of Dependency
+`sudo apt install jq -y`  
+
+### install
 `bash install.sh`
 
 <!-- `bash_script/`を`$HOME/.bash_script`に移動  
