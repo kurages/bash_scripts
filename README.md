@@ -11,7 +11,8 @@
 ### install
 `bash install.sh`
 
-<!-- `bash_script/`を`$HOME/.bash_script`に移動  
+### スクリプト使わない場合
+`bash_script/`を`$HOME/.bash_script`に移動  
 
 ```bash
 while read -r f; do
@@ -19,7 +20,8 @@ while read -r f; do
 done < <(find ~/.bash_script/ -name "*.bashrc"| sort -r)
 ```
 これを`.bashrc`に追記  
-ログインしなおすか`source ~/.bashrc`すればおk -->
+
+ログインしなおすか`source ~/.bashrc`すればおk
 
 ## ロードスクリプトの追加
 ファイル名を`優先順位_hoge.bashrc`にして`$HOME/.bash_script`直下に置けばおｋ  

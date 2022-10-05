@@ -4,6 +4,9 @@ if [ ! -f ~/.config/bash_scripts/git_multi_user.json ]; then
 	{
 	    "user_name": {
 	        "email": "sample@example.com"
+	    },
+		"user_name2": {
+	        "email": "sample@example.com"
 	    }
 	}
 	EOF
